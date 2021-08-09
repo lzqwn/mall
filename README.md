@@ -1,2 +1,2 @@
-# mall
-springcloud实战学习
+# gulimall
+学习
