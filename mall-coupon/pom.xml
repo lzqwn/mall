@@ -5,7 +5,7 @@
     <artifactId>mall-coupon</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>mall-coupon</name>
-    <description>mall-coupon</description>
+    <description>优惠券服务</description>
 
     <parent>
         <groupId>com.lzqwn.mall</groupId>
@@ -16,14 +16,10 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <groupId>com.lzqwn.mall</groupId>
+            <artifactId>mall-common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-openfeign</artifactId>
-        </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>

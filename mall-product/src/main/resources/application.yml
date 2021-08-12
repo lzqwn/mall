@@ -1,7 +1,7 @@
 spring:
   datasource:
     #MySQL配置
-    driverClassName: com.mysql.jdbc.Driver
+    driverClassName: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://192.168.169.2:3306/gulimall_pms?useUnicode=true&characterEncoding=UTF-8&useSSL=false
     username: root
     password: root
@@ -13,3 +13,6 @@ mybatis-plus:
   global-config:
     db-config:
       id-type: auto #主键自增
+
+server:
+  port: 7000

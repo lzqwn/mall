@@ -1,4 +1,4 @@
-package com.lzqwn.mall.mallcoupon;
+package com.lzqwn.mall.coupon;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
