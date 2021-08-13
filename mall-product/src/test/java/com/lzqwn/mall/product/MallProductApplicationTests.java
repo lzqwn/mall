@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
-import java.nio.charset.StandardCharsets;
 
 @SpringBootTest
 class MallProductApplicationTests {

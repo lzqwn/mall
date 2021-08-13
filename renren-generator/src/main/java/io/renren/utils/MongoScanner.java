@@ -12,7 +12,12 @@ import org.bson.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.ForkJoinTask;
 import java.util.concurrent.RecursiveTask;
@@ -22,24 +27,15 @@ import java.util.stream.Collectors;
  * @author: gxz  514190950@qq.com
  **/
 public class MongoScanner {
-    private Logger logger = LoggerFactory.getLogger(getClass());
-
-    private MongoCollection<Document> collection;
-
-    final private int scanCount;
-
-    private List<String> colNames;
-
-    private MongoDefinition mongoDefinition;
-
-
     private final static int[] TYPE = {3, 16, 18, 8, 9, 2, 1};
-
     private final static int ARRAY_TYPE = 4;
-
     private final static int MAX_COUNT = 200000;
-
     private final static int DEFAULT_COUNT = 100000;
+    final private int scanCount;
+    private Logger logger = LoggerFactory.getLogger(getClass());
+    private MongoCollection<Document> collection;
+    private List<String> colNames;
+    private MongoDefinition mongoDefinition;
 
 
     public MongoScanner(MongoCollection<Document> collection) {
@@ -232,12 +228,17 @@ public class MongoScanner {
         return result.setChild(invoke).setPropertyName(this.collection.getNamespace().getCollectionName());
     }
 
+    public <T> List<T> mergeList(List<T> list1, List<T> list2) {
+        list1.addAll(list2);
+        return list1;
+    }
+
     /**
      * 功能描述:forkJoin多线程框架的实现  通过业务拆分解析类型
      */
     class ForkJoinProcessType extends RecursiveTask<List<MongoDefinition>> {
-        List<String> names;
         private final int THRESHOLD = 6;
+        List<String> names;
 
         ForkJoinProcessType(List<String> names) {
             this.names = names;
@@ -270,9 +271,9 @@ public class MongoScanner {
      * 功能描述:forkJoin多线程框架的实现  通过业务拆分获得属性名
      */
     class ForkJoinGetProcessName extends RecursiveTask<List<String>> {
+        private final int THRESHOLD = 5000;
         private int begin; //查询开始位置
         private int end;
-        private final int THRESHOLD = 5000;
 
         ForkJoinGetProcessName(int begin, int end) {
             this.begin = begin;
@@ -293,9 +294,5 @@ public class MongoScanner {
                 return distinctAndJoin(pre.join(), next.join()); //去重合并
             }
         }
-    }
-    public  <T> List<T> mergeList(List<T> list1, List<T> list2){
-        list1.addAll(list2);
-        return list1;
     }
 }

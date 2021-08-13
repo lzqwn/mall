@@ -3,7 +3,7 @@
 
 <mapper namespace="com.lzqwn.mall.product.dao.PmsCategoryBrandRelationDao">
 
-	<!-- 可根据自己的需求，是否要使用 -->
+    <!-- 可根据自己的需求，是否要使用 -->
     <resultMap type="com.lzqwn.mall.product.entity.PmsCategoryBrandRelationEntity" id="pmsCategoryBrandRelationMap">
         <result property="id" column="id"/>
         <result property="brandId" column="brand_id"/>

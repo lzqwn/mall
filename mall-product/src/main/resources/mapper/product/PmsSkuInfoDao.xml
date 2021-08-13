@@ -3,7 +3,7 @@
 
 <mapper namespace="com.lzqwn.mall.product.dao.PmsSkuInfoDao">
 
-	<!-- 可根据自己的需求，是否要使用 -->
+    <!-- 可根据自己的需求，是否要使用 -->
     <resultMap type="com.lzqwn.mall.product.entity.PmsSkuInfoEntity" id="pmsSkuInfoMap">
         <result property="skuId" column="sku_id"/>
         <result property="spuId" column="spu_id"/>

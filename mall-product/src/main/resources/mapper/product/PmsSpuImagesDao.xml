@@ -3,7 +3,7 @@
 
 <mapper namespace="com.lzqwn.mall.product.dao.PmsSpuImagesDao">
 
-	<!-- 可根据自己的需求，是否要使用 -->
+    <!-- 可根据自己的需求，是否要使用 -->
     <resultMap type="com.lzqwn.mall.product.entity.PmsSpuImagesEntity" id="pmsSpuImagesMap">
         <result property="id" column="id"/>
         <result property="spuId" column="spu_id"/>

@@ -8,7 +8,12 @@
 
 package io.renren.config;
 
-import io.renren.dao.*;
+import io.renren.dao.GeneratorDao;
+import io.renren.dao.MongoDBGeneratorDao;
+import io.renren.dao.MySQLGeneratorDao;
+import io.renren.dao.OracleGeneratorDao;
+import io.renren.dao.PostgreSQLGeneratorDao;
+import io.renren.dao.SQLServerGeneratorDao;
 import io.renren.utils.RRException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,6 +29,7 @@ import org.springframework.context.annotation.Primary;
  */
 @Configuration
 public class DbConfig {
+    private static boolean mongo = false;
     @Value("${renren.database: mysql}")
     private String database;
     @Autowired
@@ -35,7 +41,9 @@ public class DbConfig {
     @Autowired
     private PostgreSQLGeneratorDao postgreSQLGeneratorDao;
 
-    private static boolean mongo = false;
+    public static boolean isMongo() {
+        return mongo;
+    }
 
     @Bean
     @Primary
@@ -60,10 +68,6 @@ public class DbConfig {
     public GeneratorDao getMongoDBDao(MongoDBGeneratorDao mongoDBGeneratorDao) {
         mongo = true;
         return mongoDBGeneratorDao;
-    }
-
-    public static boolean isMongo() {
-        return mongo;
     }
 
 }

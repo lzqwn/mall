@@ -32,7 +32,7 @@ public class OrderOperateHistoryController {
      * 列表
      */
     @RequestMapping("/list")
-    public R list(@RequestParam Map<String, Object> params){
+    public R list(@RequestParam Map<String, Object> params) {
         PageUtils page = orderOperateHistoryService.queryPage(params);
 
         return R.ok().put("page", page);
@@ -43,8 +43,8 @@ public class OrderOperateHistoryController {
      * 信息
      */
     @RequestMapping("/info/{id}")
-    public R info(@PathVariable("id") Long id){
-		OrderOperateHistoryEntity orderOperateHistory = orderOperateHistoryService.getById(id);
+    public R info(@PathVariable("id") Long id) {
+        OrderOperateHistoryEntity orderOperateHistory = orderOperateHistoryService.getById(id);
 
         return R.ok().put("orderOperateHistory", orderOperateHistory);
     }
@@ -53,8 +53,8 @@ public class OrderOperateHistoryController {
      * 保存
      */
     @RequestMapping("/save")
-    public R save(@RequestBody OrderOperateHistoryEntity orderOperateHistory){
-		orderOperateHistoryService.save(orderOperateHistory);
+    public R save(@RequestBody OrderOperateHistoryEntity orderOperateHistory) {
+        orderOperateHistoryService.save(orderOperateHistory);
 
         return R.ok();
     }
@@ -63,8 +63,8 @@ public class OrderOperateHistoryController {
      * 修改
      */
     @RequestMapping("/update")
-    public R update(@RequestBody OrderOperateHistoryEntity orderOperateHistory){
-		orderOperateHistoryService.updateById(orderOperateHistory);
+    public R update(@RequestBody OrderOperateHistoryEntity orderOperateHistory) {
+        orderOperateHistoryService.updateById(orderOperateHistory);
 
         return R.ok();
     }
@@ -73,8 +73,8 @@ public class OrderOperateHistoryController {
      * 删除
      */
     @RequestMapping("/delete")
-    public R delete(@RequestBody Long[] ids){
-		orderOperateHistoryService.removeByIds(Arrays.asList(ids));
+    public R delete(@RequestBody Long[] ids) {
+        orderOperateHistoryService.removeByIds(Arrays.asList(ids));
 
         return R.ok();
     }

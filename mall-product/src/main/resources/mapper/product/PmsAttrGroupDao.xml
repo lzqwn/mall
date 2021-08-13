@@ -3,7 +3,7 @@
 
 <mapper namespace="com.lzqwn.mall.product.dao.PmsAttrGroupDao">
 
-	<!-- 可根据自己的需求，是否要使用 -->
+    <!-- 可根据自己的需求，是否要使用 -->
     <resultMap type="com.lzqwn.mall.product.entity.PmsAttrGroupEntity" id="pmsAttrGroupMap">
         <result property="attrGroupId" column="attr_group_id"/>
         <result property="attrGroupName" column="attr_group_name"/>

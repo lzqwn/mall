@@ -1,8 +1,9 @@
 package com.lzqwn.mall.ware.controller;
 
-import java.util.Arrays;
-import java.util.Map;
-
+import com.lzqwn.common.utils.PageUtils;
+import com.lzqwn.common.utils.R;
+import com.lzqwn.mall.ware.entity.WareInfoEntity;
+import com.lzqwn.mall.ware.service.WareInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,11 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lzqwn.mall.ware.entity.WareInfoEntity;
-import com.lzqwn.mall.ware.service.WareInfoService;
-import com.lzqwn.common.utils.PageUtils;
-import com.lzqwn.common.utils.R;
-
+import java.util.Arrays;
+import java.util.Map;
 
 
 /**
@@ -34,7 +32,7 @@ public class WareInfoController {
      * 列表
      */
     @RequestMapping("/list")
-    public R list(@RequestParam Map<String, Object> params){
+    public R list(@RequestParam Map<String, Object> params) {
         PageUtils page = wareInfoService.queryPage(params);
 
         return R.ok().put("page", page);
@@ -45,8 +43,8 @@ public class WareInfoController {
      * 信息
      */
     @RequestMapping("/info/{id}")
-    public R info(@PathVariable("id") Long id){
-		WareInfoEntity wareInfo = wareInfoService.getById(id);
+    public R info(@PathVariable("id") Long id) {
+        WareInfoEntity wareInfo = wareInfoService.getById(id);
 
         return R.ok().put("wareInfo", wareInfo);
     }
@@ -55,8 +53,8 @@ public class WareInfoController {
      * 保存
      */
     @RequestMapping("/save")
-    public R save(@RequestBody WareInfoEntity wareInfo){
-		wareInfoService.save(wareInfo);
+    public R save(@RequestBody WareInfoEntity wareInfo) {
+        wareInfoService.save(wareInfo);
 
         return R.ok();
     }
@@ -65,8 +63,8 @@ public class WareInfoController {
      * 修改
      */
     @RequestMapping("/update")
-    public R update(@RequestBody WareInfoEntity wareInfo){
-		wareInfoService.updateById(wareInfo);
+    public R update(@RequestBody WareInfoEntity wareInfo) {
+        wareInfoService.updateById(wareInfo);
 
         return R.ok();
     }
@@ -75,8 +73,8 @@ public class WareInfoController {
      * 删除
      */
     @RequestMapping("/delete")
-    public R delete(@RequestBody Long[] ids){
-		wareInfoService.removeByIds(Arrays.asList(ids));
+    public R delete(@RequestBody Long[] ids) {
+        wareInfoService.removeByIds(Arrays.asList(ids));
 
         return R.ok();
     }

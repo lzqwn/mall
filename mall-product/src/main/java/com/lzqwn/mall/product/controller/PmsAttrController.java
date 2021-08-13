@@ -1,8 +1,9 @@
 package com.lzqwn.mall.product.controller;
 
-import java.util.Arrays;
-import java.util.Map;
-
+import com.lzqwn.common.utils.PageUtils;
+import com.lzqwn.common.utils.R;
+import com.lzqwn.mall.product.entity.PmsAttrEntity;
+import com.lzqwn.mall.product.service.PmsAttrService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,11 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lzqwn.mall.product.entity.PmsAttrEntity;
-import com.lzqwn.mall.product.service.PmsAttrService;
-import com.lzqwn.common.utils.PageUtils;
-import com.lzqwn.common.utils.R;
-
+import java.util.Arrays;
+import java.util.Map;
 
 
 /**
@@ -34,7 +32,7 @@ public class PmsAttrController {
      * 列表
      */
     @RequestMapping("/list")
-    public R list(@RequestParam Map<String, Object> params){
+    public R list(@RequestParam Map<String, Object> params) {
         PageUtils page = pmsAttrService.queryPage(params);
 
         return R.ok().put("page", page);
@@ -45,8 +43,8 @@ public class PmsAttrController {
      * 信息
      */
     @RequestMapping("/info/{attrId}")
-    public R info(@PathVariable("attrId") Long attrId){
-		PmsAttrEntity pmsAttr = pmsAttrService.getById(attrId);
+    public R info(@PathVariable("attrId") Long attrId) {
+        PmsAttrEntity pmsAttr = pmsAttrService.getById(attrId);
 
         return R.ok().put("pmsAttr", pmsAttr);
     }
@@ -55,8 +53,8 @@ public class PmsAttrController {
      * 保存
      */
     @RequestMapping("/save")
-    public R save(@RequestBody PmsAttrEntity pmsAttr){
-		pmsAttrService.save(pmsAttr);
+    public R save(@RequestBody PmsAttrEntity pmsAttr) {
+        pmsAttrService.save(pmsAttr);
 
         return R.ok();
     }
@@ -65,8 +63,8 @@ public class PmsAttrController {
      * 修改
      */
     @RequestMapping("/update")
-    public R update(@RequestBody PmsAttrEntity pmsAttr){
-		pmsAttrService.updateById(pmsAttr);
+    public R update(@RequestBody PmsAttrEntity pmsAttr) {
+        pmsAttrService.updateById(pmsAttr);
 
         return R.ok();
     }
@@ -75,8 +73,8 @@ public class PmsAttrController {
      * 删除
      */
     @RequestMapping("/delete")
-    public R delete(@RequestBody Long[] attrIds){
-		pmsAttrService.removeByIds(Arrays.asList(attrIds));
+    public R delete(@RequestBody Long[] attrIds) {
+        pmsAttrService.removeByIds(Arrays.asList(attrIds));
 
         return R.ok();
     }

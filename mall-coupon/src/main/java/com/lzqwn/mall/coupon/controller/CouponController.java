@@ -1,8 +1,9 @@
 package com.lzqwn.mall.coupon.controller;
 
-import java.util.Arrays;
-import java.util.Map;
-
+import com.lzqwn.common.utils.PageUtils;
+import com.lzqwn.common.utils.R;
+import com.lzqwn.mall.coupon.entity.CouponEntity;
+import com.lzqwn.mall.coupon.service.CouponService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,11 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lzqwn.mall.coupon.entity.CouponEntity;
-import com.lzqwn.mall.coupon.service.CouponService;
-import com.lzqwn.common.utils.PageUtils;
-import com.lzqwn.common.utils.R;
-
+import java.util.Arrays;
+import java.util.Map;
 
 
 /**
@@ -34,7 +32,7 @@ public class CouponController {
      * 列表
      */
     @RequestMapping("/list")
-    public R list(@RequestParam Map<String, Object> params){
+    public R list(@RequestParam Map<String, Object> params) {
         PageUtils page = couponService.queryPage(params);
 
         return R.ok().put("page", page);
@@ -45,8 +43,8 @@ public class CouponController {
      * 信息
      */
     @RequestMapping("/info/{id}")
-    public R info(@PathVariable("id") Long id){
-		CouponEntity coupon = couponService.getById(id);
+    public R info(@PathVariable("id") Long id) {
+        CouponEntity coupon = couponService.getById(id);
 
         return R.ok().put("coupon", coupon);
     }
@@ -55,8 +53,8 @@ public class CouponController {
      * 保存
      */
     @RequestMapping("/save")
-    public R save(@RequestBody CouponEntity coupon){
-		couponService.save(coupon);
+    public R save(@RequestBody CouponEntity coupon) {
+        couponService.save(coupon);
 
         return R.ok();
     }
@@ -65,8 +63,8 @@ public class CouponController {
      * 修改
      */
     @RequestMapping("/update")
-    public R update(@RequestBody CouponEntity coupon){
-		couponService.updateById(coupon);
+    public R update(@RequestBody CouponEntity coupon) {
+        couponService.updateById(coupon);
 
         return R.ok();
     }
@@ -75,8 +73,8 @@ public class CouponController {
      * 删除
      */
     @RequestMapping("/delete")
-    public R delete(@RequestBody Long[] ids){
-		couponService.removeByIds(Arrays.asList(ids));
+    public R delete(@RequestBody Long[] ids) {
+        couponService.removeByIds(Arrays.asList(ids));
 
         return R.ok();
     }
