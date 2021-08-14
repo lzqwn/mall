@@ -18,3 +18,18 @@ spring:
           uri: https://www.qq.com
           predicates:
             - Query=url,qq
+
+        - id: product_route
+          uri: lb://mall-product # 注册中心的服务
+          predicates:
+            - Path=/api/product/**
+          filters:
+            - RewritePath=/api/(?<segment>/?.*),/$\{segment}
+
+
+        - id: admin_route
+          uri: lb://mall-admin # 路由给renren-fast(此处使用的是注册中心的服务名)
+          predicates: # 什么情况下路由给它
+            - Path=/api/** # 默认前端项目都带上api前缀，就是我们前面题的localhost:88/api
+          filters:
+            - RewritePath=/api/(?<segment>.*),/renren-fast/$\{segment}  # 把/api/* 改变成 /renren-fast/*

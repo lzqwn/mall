@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 
@@ -27,6 +28,16 @@ import java.util.Map;
 public class CategoryController {
     @Autowired
     private CategoryService categoryService;
+
+
+    /**
+     * 列表
+     */
+    @RequestMapping("/treeShapeList")
+    public R treeShapeList(@RequestParam Map<String, Object> params) {
+        List<CategoryEntity> data = categoryService.treeShapeListAll();
+        return R.ok().put("data", data);
+    }
 
     /**
      * 列表
