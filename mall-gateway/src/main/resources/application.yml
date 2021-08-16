@@ -26,6 +26,12 @@ spring:
           filters:
             - RewritePath=/api/(?<segment>/?.*),/$\{segment}
 
+        - id: third_party_route
+          uri: lb://mall-third-party # 注册中心的服务
+          predicates:
+            - Path=/api/third/party/**
+          filters:
+            - RewritePath=/api/(?<segment>/?.*),/$\{segment}
 
         - id: admin_route
           uri: lb://mall-admin # 路由给renren-fast(此处使用的是注册中心的服务名)

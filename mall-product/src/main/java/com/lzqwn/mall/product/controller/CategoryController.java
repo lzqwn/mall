@@ -31,7 +31,7 @@ public class CategoryController {
 
 
     /**
-     * 列表
+     * 树形列表
      */
     @RequestMapping("/treeShapeList")
     public R treeShapeList(@RequestParam Map<String, Object> params) {
@@ -85,8 +85,8 @@ public class CategoryController {
      */
     @RequestMapping("/delete")
     public R delete(@RequestBody Long[] catIds) {
-        categoryService.removeByIds(Arrays.asList(catIds));
-
+        //categoryService.removeByIds(Arrays.asList(catIds));
+        categoryService.removelogicByIds(Arrays.asList(catIds));
         return R.ok();
     }
 

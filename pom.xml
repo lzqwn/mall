@@ -19,6 +19,7 @@
         <module>renren-fast</module>
         <module>renren-generator</module>
         <module>mall-gateway</module>
+        <module>mall-third-party</module>
     </modules>
 
     <properties>
@@ -35,6 +36,7 @@
         <junit.version>4.13.2</junit.version>
         <hutool.version>5.4.0</hutool.version>
         <spring-cloud-alibaba.version>2.2.0.RELEASE</spring-cloud-alibaba.version>
+        <aliyun-sdk-oss.version>3.10.2</aliyun-sdk-oss.version>
     </properties>
 
     <parent>
@@ -45,6 +47,12 @@
     </parent>
 
     <dependencies>
+
+       <!-- <dependency>
+            <groupId>com.aliyun.oss</groupId>
+            <artifactId>aliyun-sdk-oss</artifactId>
+            <version>${aliyun-sdk-oss.version}</version>
+        </dependency>-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>

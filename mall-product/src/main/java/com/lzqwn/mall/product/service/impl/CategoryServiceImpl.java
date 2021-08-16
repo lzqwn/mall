@@ -64,4 +64,16 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
                 .sorted(Comparator.comparingInt(sorted -> (sorted.getSort() == null ? 0 : sorted.getSort())))
                 .collect(Collectors.toList());
     }
+
+    /**
+     * @description: 逻辑删除分类信息
+     * @author liuyang
+     * @date: 2021/8/15 17:24
+     * @param asList:
+     * @return void
+     */
+    @Override
+    public void removelogicByIds(List<Long> asList) {
+       baseMapper.deleteBatchIds(asList);
+    }
 }

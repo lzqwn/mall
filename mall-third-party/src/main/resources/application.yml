@@ -1,0 +1,15 @@
+spring:
+  cloud:
+    alicloud:
+      access-key: LTAI5tCFXkZBorQs96vJyrmw
+      secret-key: HjWlOO2m9YB0LVCpYRFwvqs6Ccxq94
+      oss:
+        endpoint: oss-cn-shanghai.aliyuncs.com
+    nacos:
+      discovery:
+        server-addr: 192.168.169.2:8848
+
+  application:
+    name: mall-third-party
+server:
+  port: 1000
