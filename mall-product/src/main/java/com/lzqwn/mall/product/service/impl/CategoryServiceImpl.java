@@ -7,10 +7,14 @@ import com.lzqwn.common.utils.PageUtils;
 import com.lzqwn.common.utils.Query;
 import com.lzqwn.mall.product.dao.CategoryDao;
 import com.lzqwn.mall.product.entity.CategoryEntity;
+import com.lzqwn.mall.product.service.CategoryBrandRelationService;
 import com.lzqwn.mall.product.service.CategoryService;
+import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +24,9 @@ import java.util.stream.Stream;
 
 @Service("categoryService")
 public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity> implements CategoryService {
+
+    @Autowired
+    private CategoryBrandRelationService categoryBrandRelationService;
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
@@ -75,5 +82,36 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
     @Override
     public void removelogicByIds(List<Long> asList) {
        baseMapper.deleteBatchIds(asList);
+    }
+
+    /**
+     * 根据分类id查询出所有父类分类集合(包含自身)
+     */
+    @Override
+    public Long[] getcatelogPath(Long catelogId) {
+        List<Long> catelogPath = findCatelogPath(catelogId, new ArrayList<>());
+        Collections.reverse(catelogPath);
+        return catelogPath.toArray(new Long[catelogPath.size()]);
+    }
+
+    /**
+     * 递归遍历父级类别
+     */
+    private List<Long> findCatelogPath(Long catelogId,List<Long> catelogPath){
+        CategoryEntity category = this.getById(catelogId);
+        catelogPath.add(category.getCatId());
+        if(category.getParentCid() !=0){
+            findCatelogPath(category.getParentCid(),catelogPath);
+        }
+        return catelogPath;
+    }
+
+    @Override
+    public void updateCategory(CategoryEntity category) {
+        if(StringUtils.isNotBlank(category.getName()))
+        {
+            categoryBrandRelationService.updateCategoryName(category.getCatId(),category.getName());
+        }
+        this.updateById(category);
     }
 }
