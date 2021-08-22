@@ -24,10 +24,10 @@ public class WareInfoServiceImpl extends ServiceImpl<WareInfoDao, WareInfoEntity
         String key = (String) params.get("key");
 
         if (!StringUtils.isEmpty(key)) {
-            queryWrapper.eq("id",key)
-                    .or().like("name",key)
-                    .or().like("address",key)
-                    .or().like("areacode",key);
+            queryWrapper.eq("id", key)
+                    .or().like("name", key)
+                    .or().like("address", key)
+                    .or().like("areacode", key);
         }
 
 

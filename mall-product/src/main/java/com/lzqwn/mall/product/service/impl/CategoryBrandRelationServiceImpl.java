@@ -7,13 +7,10 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.lzqwn.common.utils.PageUtils;
 import com.lzqwn.common.utils.Query;
 import com.lzqwn.mall.product.dao.CategoryBrandRelationDao;
-import com.lzqwn.mall.product.entity.AttrAttrgroupRelationEntity;
 import com.lzqwn.mall.product.entity.BrandEntity;
 import com.lzqwn.mall.product.entity.CategoryBrandRelationEntity;
 import com.lzqwn.mall.product.service.BrandService;
 import com.lzqwn.mall.product.service.CategoryBrandRelationService;
-import com.lzqwn.mall.product.vo.AttrGroupRelationVo;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,30 +40,32 @@ public class CategoryBrandRelationServiceImpl extends ServiceImpl<CategoryBrandR
         CategoryBrandRelationEntity categoryBrand = new CategoryBrandRelationEntity();
         categoryBrand.setBrandName(name);
 
-        this.update(categoryBrand, new UpdateWrapper<CategoryBrandRelationEntity>().eq("brand_id",brandId));
+        this.update(categoryBrand, new UpdateWrapper<CategoryBrandRelationEntity>().eq("brand_id", brandId));
         //this.baseMapper.updateBrandName(brandId,name);
     }
 
     /**
      * 根据分类id修改分类名称
-     * @author lzqwm
+     *
      * @param catId:
      * @param name:
      * @return void
+     * @author lzqwm
      */
     @Override
     public void updateCategoryName(Long catId, String name) {
         CategoryBrandRelationEntity categoryBrand = new CategoryBrandRelationEntity();
         categoryBrand.setCatelogName(name);
         //categoryBrand.setBrandId(brandId);
-        this.update(categoryBrand, new UpdateWrapper<CategoryBrandRelationEntity>().eq("catelog_id",catId));
+        this.update(categoryBrand, new UpdateWrapper<CategoryBrandRelationEntity>().eq("catelog_id", catId));
     }
 
     /**
      * 根据分类id查询品牌信息
-     * @author lzqwn
+     *
      * @param catId:
      * @return java.util.List<com.lzqwn.mall.product.entity.BrandEntity>
+     * @author lzqwn
      */
     @Override
     public List<BrandEntity> getByCategoryId(Long catId) {

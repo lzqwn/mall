@@ -45,19 +45,18 @@ public class AttrGroupServiceImpl extends ServiceImpl<AttrGroupDao, AttrGroupEnt
         IPage<AttrGroupEntity> page = null;
         QueryWrapper<AttrGroupEntity> queryWrapper = new QueryWrapper<AttrGroupEntity>();
         String key = (String) params.get("key");
-        if(StringUtils.isNotEmpty(key)){
-            queryWrapper.and((wrapper)->wrapper.like("descript",key).or().like("attr_group_name",key));
+        if (StringUtils.isNotEmpty(key)) {
+            queryWrapper.and((wrapper) -> wrapper.like("descript", key).or().like("attr_group_name", key));
         }
-        if(catelogId==0){
+        if (catelogId == 0) {
             page = this.page(
                     new Query<AttrGroupEntity>().getPage(params),
                     queryWrapper);
 
-        }
-        else {
-            queryWrapper.eq("catelog_id",catelogId);
+        } else {
+            queryWrapper.eq("catelog_id", catelogId);
             //1.分页信息,2查询信息
-            page = this.page(new Query<AttrGroupEntity>().getPage(params),queryWrapper);
+            page = this.page(new Query<AttrGroupEntity>().getPage(params), queryWrapper);
         }
         assert page != null;
         return new PageUtils(page);
@@ -65,16 +64,17 @@ public class AttrGroupServiceImpl extends ServiceImpl<AttrGroupDao, AttrGroupEnt
 
     /**
      * 根据分类id查询属性信息(分组包属性)
-     * @author lzqwn
+     *
      * @param catId:
      * @return java.util.List<com.lzqwn.mall.product.vo.AttrGroupWithAttrsVo>
+     * @author lzqwn
      */
     @Override
     public List<AttrGroupWithAttrsVo> getAttrGroupWithattr(Long catId) {
         List<AttrGroupEntity> attrGroupEntityList = this.baseMapper.selectList(new QueryWrapper<AttrGroupEntity>().eq("catelog_id", catId));
         return attrGroupEntityList.stream().map(attrGroupEntity -> {
             AttrGroupWithAttrsVo vo = new AttrGroupWithAttrsVo();
-            BeanUtils.copyProperties(attrGroupEntity,vo);
+            BeanUtils.copyProperties(attrGroupEntity, vo);
             vo.setAttrs(attrService.getRelationAttr(vo.getAttrGroupId()));
             return vo;
         }).collect(Collectors.toList());

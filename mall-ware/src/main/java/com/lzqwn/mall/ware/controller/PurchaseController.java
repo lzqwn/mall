@@ -36,6 +36,7 @@ public class PurchaseController {
 
     /**
      * 完成采购单
+     *
      * @param doneVo
      * @return
      */
@@ -49,6 +50,7 @@ public class PurchaseController {
 
     /**
      * 领取采购单
+     *
      * @param ids
      * @return
      */
@@ -62,6 +64,7 @@ public class PurchaseController {
 
     /**
      * 合并整单
+     *
      * @param mergeVo
      * @return
      */
@@ -76,7 +79,7 @@ public class PurchaseController {
 
     ///ware/purchase/unreceive/list
     @GetMapping(value = "/unreceive/list")
-    public R unreceiveList(@RequestParam Map<String, Object> params){
+    public R unreceiveList(@RequestParam Map<String, Object> params) {
         PageUtils page = purchaseService.queryPageUnreceive(params);
 
         return R.ok().put("page", page);

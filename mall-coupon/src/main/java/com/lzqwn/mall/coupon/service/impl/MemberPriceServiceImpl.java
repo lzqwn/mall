@@ -25,7 +25,7 @@ public class MemberPriceServiceImpl extends ServiceImpl<MemberPriceDao, MemberPr
         String key = (String) params.get("key");
 
         if (!StringUtils.isEmpty(key)) {
-            queryWrapper.eq("id",key).or().eq("sku_id",key).or().eq("member_level_id",key);
+            queryWrapper.eq("id", key).or().eq("sku_id", key).or().eq("member_level_id", key);
         }
 
         IPage<MemberPriceEntity> page = this.page(

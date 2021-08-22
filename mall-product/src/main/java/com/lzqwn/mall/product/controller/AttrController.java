@@ -2,7 +2,6 @@ package com.lzqwn.mall.product.controller;
 
 import com.lzqwn.common.utils.PageUtils;
 import com.lzqwn.common.utils.R;
-import com.lzqwn.mall.product.entity.AttrEntity;
 import com.lzqwn.mall.product.entity.ProductAttrValueEntity;
 import com.lzqwn.mall.product.service.AttrService;
 import com.lzqwn.mall.product.service.ProductAttrValueService;
@@ -40,24 +39,25 @@ public class AttrController {
 
 
     /**
-     *  获取spu规格
+     * 获取spu规格
      */
     @GetMapping("/base/listforspu/{spuId}")
-    public R baseAttrlistforspu(@PathVariable("spuId") Long spuId){
+    public R baseAttrlistforspu(@PathVariable("spuId") Long spuId) {
 
         List<ProductAttrValueEntity> entities = productAttrValueService.baseAttrListforspu(spuId);
 
-        return R.ok().put("data",entities);
+        return R.ok().put("data", entities);
     }
 
     //base
     @RequestMapping("/{attrType}/list/{catelogId}")
     public R list(@RequestParam Map<String, Object> params
-            ,@PathVariable("catelogId") Long catelogId
-            ,@PathVariable("attrType") String attrType) {
-        PageUtils page = attrService.queryPage(params,catelogId,attrType);
+            , @PathVariable("catelogId") Long catelogId
+            , @PathVariable("attrType") String attrType) {
+        PageUtils page = attrService.queryPage(params, catelogId, attrType);
         return R.ok().put("page", page);
     }
+
     /**
      * 列表
      */
@@ -97,9 +97,9 @@ public class AttrController {
 
     @PostMapping("/update/{spuId}")
     public R updateSpuAttr(@PathVariable("spuId") Long spuId,
-                           @RequestBody List<ProductAttrValueEntity> entities){
+                           @RequestBody List<ProductAttrValueEntity> entities) {
 
-        productAttrValueService.updateSpuAttr(spuId,entities);
+        productAttrValueService.updateSpuAttr(spuId, entities);
 
         return R.ok();
     }

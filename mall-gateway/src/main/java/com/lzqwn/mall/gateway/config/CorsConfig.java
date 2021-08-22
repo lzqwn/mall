@@ -10,9 +10,9 @@ import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
 public class CorsConfig {
     // 添加过滤器
     @Bean
-    public CorsWebFilter corsWebFilter(){
+    public CorsWebFilter corsWebFilter() {
         // 基于url跨域，选择reactive包下的
-        UrlBasedCorsConfigurationSource source=new UrlBasedCorsConfigurationSource();
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         // 跨域配置信息
         CorsConfiguration corsConfiguration = new CorsConfiguration();
         // 允许跨域的头
@@ -25,7 +25,7 @@ public class CorsConfig {
         corsConfiguration.setAllowCredentials(true);
 
         // 任意url都要进行跨域配置
-        source.registerCorsConfiguration("/**",corsConfiguration);
+        source.registerCorsConfiguration("/**", corsConfiguration);
         return new CorsWebFilter(source);
     }
 }

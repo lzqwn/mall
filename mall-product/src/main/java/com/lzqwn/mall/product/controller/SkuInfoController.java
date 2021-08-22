@@ -33,6 +33,7 @@ public class SkuInfoController {
 
     /**
      * 根据skuId查询当前商品的价格
+     *
      * @param skuId
      * @return
      */
@@ -50,7 +51,7 @@ public class SkuInfoController {
      * 列表
      */
     @RequestMapping("/list")
-    public R list(@RequestParam Map<String, Object> params){
+    public R list(@RequestParam Map<String, Object> params) {
         PageUtils page = skuInfoService.queryPageCondition(params);
 
         return R.ok().put("page", page);

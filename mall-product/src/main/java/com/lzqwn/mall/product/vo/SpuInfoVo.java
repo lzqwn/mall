@@ -10,13 +10,13 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Data
-public class SpuInfoVo{
+public class SpuInfoVo {
     private Long brandId;
 
     /**
      * 品牌名
      */
-    @NotBlank(groups = {AddGroup.class, UpdateGroup.class},message = "品牌名称不能为空")
+    @NotBlank(groups = {AddGroup.class, UpdateGroup.class}, message = "品牌名称不能为空")
     private String name;
     /**
      * 品牌logo地址
@@ -32,7 +32,7 @@ public class SpuInfoVo{
     /**
      * 显示状态[0-不显示；1-显示]
      */
-    @ListValue(value = {0,1},groups = {AddGroup.class, UpdateGroup.class})
+    @ListValue(value = {0, 1}, groups = {AddGroup.class, UpdateGroup.class})
     private Integer showStatus;
     /**
      * 检索首字母

@@ -49,12 +49,12 @@ public class WareSkuServiceImpl extends ServiceImpl<WareSkuDao, WareSkuEntity> i
 
         String skuId = (String) params.get("skuId");
         if (!StringUtils.isEmpty(skuId) && !"0".equalsIgnoreCase(skuId)) {
-            queryWrapper.eq("sku_id",skuId);
+            queryWrapper.eq("sku_id", skuId);
         }
 
         String wareId = (String) params.get("wareId");
         if (!StringUtils.isEmpty(wareId) && !"0".equalsIgnoreCase(wareId)) {
-            queryWrapper.eq("ware_id",wareId);
+            queryWrapper.eq("ware_id", wareId);
         }
 
         IPage<WareSkuEntity> page = this.page(
@@ -81,9 +81,9 @@ public class WareSkuServiceImpl extends ServiceImpl<WareSkuDao, WareSkuEntity> i
             wareSkuEntity.setStockLocked(0);
             //TODO 远程查询sku的名字，如果失败整个事务无需回滚
             //1、自己catch异常
-            try{
+            try {
                 R info = productFeignService.info(skuId);
-                Map<String,Object> data = (Map<String, Object>) info.get("skuInfo");
+                Map<String, Object> data = (Map<String, Object>) info.get("skuInfo");
                 if (info.getCode() == 0) {
                     wareSkuEntity.setSkuName((String) data.get("skuName"));
                 }
@@ -94,7 +94,7 @@ public class WareSkuServiceImpl extends ServiceImpl<WareSkuDao, WareSkuEntity> i
             wareSkuDao.insert(wareSkuEntity);
         } else {
             //修改库存信息
-            wareSkuDao.addStock(skuId,wareId,skuNum);
+            wareSkuDao.addStock(skuId, wareId, skuNum);
         }
 
     }

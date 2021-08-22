@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.lzqwn.common.utils.PageUtils;
 import com.lzqwn.mall.product.entity.BrandEntity;
 import com.lzqwn.mall.product.entity.CategoryBrandRelationEntity;
-import com.lzqwn.mall.product.vo.AttrGroupRelationVo;
 
 import java.util.List;
 import java.util.Map;
@@ -23,18 +22,20 @@ public interface CategoryBrandRelationService extends IService<CategoryBrandRela
 
     /**
      * 根据分类id修改分类名称
-     * @author lzqwm
+     *
      * @param catId:
      * @param name:
      * @return void
+     * @author lzqwm
      */
     void updateCategoryName(Long catId, String name);
 
     /**
      * 根据分类id查询品牌信息
-     * @author lzqwn
+     *
      * @param catId:
      * @return java.util.List<com.lzqwn.mall.product.entity.BrandEntity>
+     * @author lzqwn
      */
     List<BrandEntity> getByCategoryId(Long catId);
 }

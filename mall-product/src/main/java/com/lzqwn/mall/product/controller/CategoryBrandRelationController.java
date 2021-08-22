@@ -45,12 +45,13 @@ public class CategoryBrandRelationController {
 
     /**
      * 根据分类id查询品牌名称与id
+     *
      * @author lzqwn
      */
     @GetMapping("/brands/list")
-    public R brandsList(@RequestParam("catId") Long catId){
+    public R brandsList(@RequestParam("catId") Long catId) {
         List<BrandEntity> brandList = categoryBrandRelationService.getByCategoryId(catId);
-        List<BrandVo> data = brandList.stream().map((brand)->{
+        List<BrandVo> data = brandList.stream().map((brand) -> {
             BrandVo brandVo = new BrandVo();
             brandVo.setBrandId(brand.getBrandId());
             brandVo.setBrandName(brand.getName());
@@ -60,10 +61,10 @@ public class CategoryBrandRelationController {
     }
 
     @GetMapping("/catelog/list")
-    public R list(@RequestParam("brandId") Long brandId){
+    public R list(@RequestParam("brandId") Long brandId) {
         // 根据品牌id获取其分类信息
         List<CategoryBrandRelationEntity> data = categoryBrandRelationService.list(
-                new QueryWrapper<CategoryBrandRelationEntity>().eq("brand_id",brandId)
+                new QueryWrapper<CategoryBrandRelationEntity>().eq("brand_id", brandId)
         );
         return R.ok().put("data", data);
     }

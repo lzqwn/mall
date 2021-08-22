@@ -22,9 +22,10 @@ public interface AttrGroupService extends IService<AttrGroupEntity> {
 
     /**
      * 根据分类id查询属性信息(分组包属性)
-     * @author lzqwn
+     *
      * @param catId:
      * @return java.util.List<com.lzqwn.mall.product.vo.AttrGroupWithAttrsVo>
+     * @author lzqwn
      */
     List<AttrGroupWithAttrsVo> getAttrGroupWithattr(Long catId);
 }

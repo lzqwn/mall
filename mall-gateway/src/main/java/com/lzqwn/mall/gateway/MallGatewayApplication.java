@@ -8,9 +8,9 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerA
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 
 //排除数据库相关的配置
-@SpringBootApplication(exclude= {DataSourceAutoConfiguration.class,
+@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class,
         DataSourceTransactionManagerAutoConfiguration.class,
-        DruidDataSourceAutoConfigure.class ,
+        DruidDataSourceAutoConfigure.class,
         HibernateJpaAutoConfiguration.class})
 public class MallGatewayApplication {
     public static void main(String[] args) {

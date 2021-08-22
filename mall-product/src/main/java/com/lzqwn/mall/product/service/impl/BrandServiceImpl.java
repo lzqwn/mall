@@ -24,6 +24,7 @@ public class BrandServiceImpl extends ServiceImpl<BrandDao, BrandEntity> impleme
 
     /**
      * 分页查询品牌信息,key为部分字段模糊检索
+     *
      * @param params:
      * @return com.lzqwn.common.utils.PageUtils
      */
@@ -32,8 +33,8 @@ public class BrandServiceImpl extends ServiceImpl<BrandDao, BrandEntity> impleme
     public PageUtils queryPage(Map<String, Object> params) {
         String key = params.get("key").toString();
         QueryWrapper<BrandEntity> queryWrapper = new QueryWrapper<>();
-        if (StringUtils.isNotBlank(key)){
-            queryWrapper.and((wrapper)->wrapper.like("name",key).or().like("descript",key));
+        if (StringUtils.isNotBlank(key)) {
+            queryWrapper.and((wrapper) -> wrapper.like("name", key).or().like("descript", key));
         }
         IPage<BrandEntity> page = this.page(
                 new Query<BrandEntity>().getPage(params),
@@ -45,9 +46,8 @@ public class BrandServiceImpl extends ServiceImpl<BrandDao, BrandEntity> impleme
     @Transactional
     @Override
     public void updateBrand(BrandEntity brand) {
-        if(StringUtils.isNotBlank(brand.getName()))
-        {
-            categoryBrandRelationService.updateBrandName(brand.getBrandId(),brand.getName());
+        if (StringUtils.isNotBlank(brand.getName())) {
+            categoryBrandRelationService.updateBrandName(brand.getBrandId(), brand.getName());
         }
         this.updateById(brand);
     }

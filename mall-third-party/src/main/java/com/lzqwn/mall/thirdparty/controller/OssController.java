@@ -24,21 +24,21 @@ public class OssController {
     @Autowired
     OSS ossClient;
     @Value("${spring.cloud.alicloud.oss.endpoint}")
-    String endpoint ;
+    String endpoint;
     @Value("${spring.cloud.alicloud.access-key}")
-    String accessId ;
+    String accessId;
     @Value("${spring.cloud.alicloud.secret-key}")
-    String accessKey ;
+    String accessKey;
 
     @RequestMapping("/policy")
-    public R policy(){
-        String bucket ="lzqwn-oss";
+    public R policy() {
+        String bucket = "lzqwn-oss";
 
         String host = "https://" + bucket + "." + endpoint; // host的格式为 bucketname.endpoint
 
         String dir = new SimpleDateFormat("yyyy-MM-dd").format(new Date()); // 用户上传文件时指定的前缀。
 
-        Map<String, String> respMap=null;
+        Map<String, String> respMap = null;
         try {
             // 签名有效事件
             long expireTime = 30;
@@ -55,7 +55,7 @@ public class OssController {
             // 签名
             String postSignature = ossClient.calculatePostSignature(postPolicy);
 
-            respMap= new LinkedHashMap<String, String>();
+            respMap = new LinkedHashMap<String, String>();
             respMap.put("accessid", accessId);
             respMap.put("policy", encodedPolicy);
             respMap.put("signature", postSignature);
@@ -69,6 +69,6 @@ public class OssController {
         } finally {
             ossClient.shutdown();
         }
-        return R.ok().put("data",respMap);
+        return R.ok().put("data", respMap);
     }
 }

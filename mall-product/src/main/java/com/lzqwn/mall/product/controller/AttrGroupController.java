@@ -1,11 +1,9 @@
 package com.lzqwn.mall.product.controller;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.lzqwn.common.utils.PageUtils;
 import com.lzqwn.common.utils.R;
 import com.lzqwn.mall.product.entity.AttrEntity;
 import com.lzqwn.mall.product.entity.AttrGroupEntity;
-import com.lzqwn.mall.product.entity.CategoryBrandRelationEntity;
 import com.lzqwn.mall.product.service.AttrAttrgroupRelationService;
 import com.lzqwn.mall.product.service.AttrGroupService;
 import com.lzqwn.mall.product.service.AttrService;
@@ -54,12 +52,13 @@ public class AttrGroupController {
 
     /**
      * 根据分类id查询属性信息(分组包属性)
+     *
      * @author lzqwn
      */
     @GetMapping(value = "/{catId}/withattr")
     public R withattr(@PathVariable("catId") Long catId) {
         List<AttrGroupWithAttrsVo> attrGroupWithAttrsVoList = attrGroupService.getAttrGroupWithattr(catId);
-        return R.ok().put("data",attrGroupWithAttrsVoList);
+        return R.ok().put("data", attrGroupWithAttrsVoList);
     }
 
 
@@ -81,13 +80,14 @@ public class AttrGroupController {
 
         // List<AttrEntity> entities = attrService.getRelationAttr(attrgroupId);
 
-        PageUtils page = attrService.getNoRelationAttr(params,attrgroupId);
+        PageUtils page = attrService.getNoRelationAttr(params, attrgroupId);
 
-        return R.ok().put("page",page);
+        return R.ok().put("page", page);
     }
 
     /**
      * 获取属性分组有关联的其他属性
+     *
      * @param attrgroupId
      * @return
      */
@@ -96,7 +96,7 @@ public class AttrGroupController {
 
         List<AttrEntity> entities = attrService.getRelationAttr(attrgroupId);
 
-        return R.ok().put("data",entities);
+        return R.ok().put("data", entities);
     }
 
 
@@ -104,9 +104,9 @@ public class AttrGroupController {
      * 列表
      */
     @RequestMapping("/list/{catelogId}")
-    public R list(@RequestParam Map<String, Object> params,@PathVariable Integer catelogId) {
+    public R list(@RequestParam Map<String, Object> params, @PathVariable Integer catelogId) {
 
-        PageUtils page = attrGroupService.queryPage(params,catelogId);
+        PageUtils page = attrGroupService.queryPage(params, catelogId);
         return R.ok().put("page", page);
     }
 

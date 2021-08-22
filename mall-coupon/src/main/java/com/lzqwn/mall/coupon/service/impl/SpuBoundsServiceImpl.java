@@ -25,7 +25,7 @@ public class SpuBoundsServiceImpl extends ServiceImpl<SpuBoundsDao, SpuBoundsEnt
         String key = (String) params.get("key");
 
         if (!StringUtils.isEmpty(key)) {
-            queryWrapper.eq("id",key).or().eq("sku_id",key);
+            queryWrapper.eq("id", key).or().eq("sku_id", key);
         }
 
         IPage<SpuBoundsEntity> page = this.page(

@@ -29,6 +29,30 @@ public class SeckillSessionServiceImpl extends ServiceImpl<SeckillSessionDao, Se
     @Autowired
     private SeckillSkuRelationService seckillSkuRelationService;
 
+    public static void main(String[] args) {
+        // LocalDate now = LocalDate.now();
+        // LocalDate plus = now.plusDays(2);
+        // LocalDateTime now1 = LocalDateTime.now();
+        // LocalTime now2 = LocalTime.now();
+        //
+        // LocalTime max = LocalTime.MAX;
+        // LocalTime min = LocalTime.MIN;
+        //
+        // LocalDateTime start = LocalDateTime.of(now, min);
+        // LocalDateTime end = LocalDateTime.of(plus, max);
+        //
+        // System.out.println(now);
+        // System.out.println(now1);
+        // System.out.println(now2);
+        // System.out.println(plus);
+        //
+        // System.out.println(start);
+        // System.out.println(end);
+
+        // System.out.println(startTime());
+        // System.out.println(endTime());
+    }
+
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
 
@@ -37,7 +61,7 @@ public class SeckillSessionServiceImpl extends ServiceImpl<SeckillSessionDao, Se
         String key = (String) params.get("key");
 
         if (!StringUtils.isEmpty(key)) {
-            queryWrapper.eq("id",key);
+            queryWrapper.eq("id", key);
         }
 
         IPage<SeckillSessionEntity> page = this.page(
@@ -73,6 +97,7 @@ public class SeckillSessionServiceImpl extends ServiceImpl<SeckillSessionDao, Se
 
     /**
      * 当前时间
+     *
      * @return
      */
     private String startTime() {
@@ -87,6 +112,7 @@ public class SeckillSessionServiceImpl extends ServiceImpl<SeckillSessionDao, Se
 
     /**
      * 结束时间
+     *
      * @return
      */
     private String endTime() {
@@ -98,30 +124,6 @@ public class SeckillSessionServiceImpl extends ServiceImpl<SeckillSessionDao, Se
         //格式化时间
         String endFormat = end.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         return endFormat;
-    }
-
-    public static void main(String[] args) {
-        // LocalDate now = LocalDate.now();
-        // LocalDate plus = now.plusDays(2);
-        // LocalDateTime now1 = LocalDateTime.now();
-        // LocalTime now2 = LocalTime.now();
-        //
-        // LocalTime max = LocalTime.MAX;
-        // LocalTime min = LocalTime.MIN;
-        //
-        // LocalDateTime start = LocalDateTime.of(now, min);
-        // LocalDateTime end = LocalDateTime.of(plus, max);
-        //
-        // System.out.println(now);
-        // System.out.println(now1);
-        // System.out.println(now2);
-        // System.out.println(plus);
-        //
-        // System.out.println(start);
-        // System.out.println(end);
-
-        // System.out.println(startTime());
-        // System.out.println(endTime());
     }
 
 }

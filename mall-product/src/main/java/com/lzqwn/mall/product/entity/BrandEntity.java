@@ -29,14 +29,14 @@ public class BrandEntity implements Serializable {
      * 品牌id
      */
     @TableId
-    @NotNull(groups = {UpdateGroup.class},message = "修改时必须携带id")
-    @Null(groups = {AddGroup.class},message = "新增时不能携带id")
+    @NotNull(groups = {UpdateGroup.class}, message = "修改时必须携带id")
+    @Null(groups = {AddGroup.class}, message = "新增时不能携带id")
     private Long brandId;
 
     /**
      * 品牌名
      */
-    @NotBlank(groups = {AddGroup.class, UpdateGroup.class},message = "品牌名称不能为空")
+    @NotBlank(groups = {AddGroup.class, UpdateGroup.class}, message = "品牌名称不能为空")
     private String name;
     /**
      * 品牌logo地址
@@ -52,7 +52,7 @@ public class BrandEntity implements Serializable {
     /**
      * 显示状态[0-不显示；1-显示]
      */
-    @ListValue(value = {0,1},groups = {AddGroup.class, UpdateGroup.class})
+    @ListValue(value = {0, 1}, groups = {AddGroup.class, UpdateGroup.class})
     private Integer showStatus;
     /**
      * 检索首字母

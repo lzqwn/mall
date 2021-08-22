@@ -19,7 +19,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 
 @Service("categoryService")
@@ -40,7 +39,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
 
     /**
      * 树形显示所有分类
-
+     *
      * @return java.util.List<com.lzqwn.mall.product.entity.CategoryEntity>
      */
     @Override
@@ -56,26 +55,27 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
 
     /**
      * 根据递归解析数据为树形结构
+     *
      * @param category:
      * @param categories:
      * @return java.util.List<com.lzqwn.mall.product.entity.CategoryEntity>
      */
-    private List<CategoryEntity> getChildren(CategoryEntity category,List<CategoryEntity> categories)
-    {
-        return categories.stream().filter(k->k.getParentCid().equals(category.getCatId()))
-                .peek(y->y.setChildren(getChildren(y,categories)))
+    private List<CategoryEntity> getChildren(CategoryEntity category, List<CategoryEntity> categories) {
+        return categories.stream().filter(k -> k.getParentCid().equals(category.getCatId()))
+                .peek(y -> y.setChildren(getChildren(y, categories)))
                 .sorted(Comparator.comparingInt(sorted -> (sorted.getSort() == null ? 0 : sorted.getSort())))
                 .collect(Collectors.toList());
     }
 
     /**
      * 逻辑删除分类信息
+     *
      * @param asList:
      * @return void
      */
     @Override
     public void removelogicByIds(List<Long> asList) {
-       baseMapper.deleteBatchIds(asList);
+        baseMapper.deleteBatchIds(asList);
     }
 
     /**
@@ -91,20 +91,19 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
     /**
      * 递归遍历父级类别
      */
-    private List<Long> findCatelogPath(Long catelogId,List<Long> catelogPath){
+    private List<Long> findCatelogPath(Long catelogId, List<Long> catelogPath) {
         CategoryEntity category = this.getById(catelogId);
         catelogPath.add(category.getCatId());
-        if(category.getParentCid() !=0){
-            findCatelogPath(category.getParentCid(),catelogPath);
+        if (category.getParentCid() != 0) {
+            findCatelogPath(category.getParentCid(), catelogPath);
         }
         return catelogPath;
     }
 
     @Override
     public void updateCategory(CategoryEntity category) {
-        if(StringUtils.isNotBlank(category.getName()))
-        {
-            categoryBrandRelationService.updateCategoryName(category.getCatId(),category.getName());
+        if (StringUtils.isNotBlank(category.getName())) {
+            categoryBrandRelationService.updateCategoryName(category.getCatId(), category.getName());
         }
         this.updateById(category);
     }

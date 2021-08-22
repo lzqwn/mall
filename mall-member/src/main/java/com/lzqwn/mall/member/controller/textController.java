@@ -32,7 +32,7 @@ public class textController {
     public R list(@RequestParam Map<String, Object> params) {
         System.out.println("===============================================");
         R info = couponFeignService.info(1L);
-        return R.ok().put("coupon", info).put("text","123");
+        return R.ok().put("coupon", info).put("text", "123");
     }
 
     /**
@@ -41,7 +41,7 @@ public class textController {
     @RequestMapping("/printname")
     public R printname() {
 
-        return R.ok().put("name", name).put("age",age);
+        return R.ok().put("name", name).put("age", age);
     }
 
 }

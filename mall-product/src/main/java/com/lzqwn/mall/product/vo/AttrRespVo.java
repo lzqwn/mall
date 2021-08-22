@@ -3,7 +3,7 @@ package com.lzqwn.mall.product.vo;
 import lombok.Data;
 
 @Data
-public class AttrRespVo extends AttrVo{
+public class AttrRespVo extends AttrVo {
     /**
      * 分组名称
      */
