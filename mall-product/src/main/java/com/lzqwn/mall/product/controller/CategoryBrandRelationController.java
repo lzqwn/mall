@@ -9,6 +9,7 @@ import com.lzqwn.mall.product.entity.CategoryEntity;
 import com.lzqwn.mall.product.service.BrandService;
 import com.lzqwn.mall.product.service.CategoryBrandRelationService;
 import com.lzqwn.mall.product.service.CategoryService;
+import com.lzqwn.mall.product.vo.BrandVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 
 /**
@@ -40,6 +42,22 @@ public class CategoryBrandRelationController {
 
     @Autowired
     private CategoryService categoryService;
+
+    /**
+     * 根据分类id查询品牌名称与id
+     * @author lzqwn
+     */
+    @GetMapping("/brands/list")
+    public R brandsList(@RequestParam("catId") Long catId){
+        List<BrandEntity> brandList = categoryBrandRelationService.getByCategoryId(catId);
+        List<BrandVo> data = brandList.stream().map((brand)->{
+            BrandVo brandVo = new BrandVo();
+            brandVo.setBrandId(brand.getBrandId());
+            brandVo.setBrandName(brand.getName());
+            return brandVo;
+        }).collect(Collectors.toList());
+        return R.ok().put("data", data);
+    }
 
     @GetMapping("/catelog/list")
     public R list(@RequestParam("brandId") Long brandId){

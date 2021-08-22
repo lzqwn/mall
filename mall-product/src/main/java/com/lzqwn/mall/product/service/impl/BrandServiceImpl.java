@@ -23,9 +23,7 @@ public class BrandServiceImpl extends ServiceImpl<BrandDao, BrandEntity> impleme
     private CategoryBrandRelationService categoryBrandRelationService;
 
     /**
-     * @description: 分页查询品牌信息,key为部分字段模糊检索
-     * @author liuyang
-     * @date: 2021/8/19 15:47
+     * 分页查询品牌信息,key为部分字段模糊检索
      * @param params:
      * @return com.lzqwn.common.utils.PageUtils
      */

@@ -3,9 +3,11 @@ package com.lzqwn.mall.product.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.lzqwn.common.utils.PageUtils;
 import com.lzqwn.mall.product.entity.AttrEntity;
+import com.lzqwn.mall.product.vo.AttrGroupRelationVo;
 import com.lzqwn.mall.product.vo.AttrRespVo;
 import com.lzqwn.mall.product.vo.AttrVo;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -24,5 +26,12 @@ public interface AttrService extends IService<AttrEntity> {
     AttrRespVo getAttrById(Long attrId);
 
     void updateAttr(AttrVo attr);
+
+    List<AttrEntity> getRelationAttr(Long attrgroupId);
+
+    PageUtils getNoRelationAttr(Map<String, Object> params, Long attrgroupId);
+
+
+    void deleteRelation(AttrGroupRelationVo[] vos);
 }
 

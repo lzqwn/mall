@@ -39,9 +39,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
     }
 
     /**
-     * @description: 树形显示所有分类
-     * @author liuyang
-     * @date: 2021/8/14 20:20
+     * 树形显示所有分类
 
      * @return java.util.List<com.lzqwn.mall.product.entity.CategoryEntity>
      */
@@ -57,9 +55,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
     }
 
     /**
-     * @description: 根据递归解析数据为树形结构
-     * @author liuyang
-     * @date: 2021/8/14 21:30
+     * 根据递归解析数据为树形结构
      * @param category:
      * @param categories:
      * @return java.util.List<com.lzqwn.mall.product.entity.CategoryEntity>
@@ -73,9 +69,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
     }
 
     /**
-     * @description: 逻辑删除分类信息
-     * @author liuyang
-     * @date: 2021/8/15 17:24
+     * 逻辑删除分类信息
      * @param asList:
      * @return void
      */

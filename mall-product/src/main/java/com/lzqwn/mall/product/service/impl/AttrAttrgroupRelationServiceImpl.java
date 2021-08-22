@@ -8,9 +8,13 @@ import com.lzqwn.common.utils.Query;
 import com.lzqwn.mall.product.dao.AttrAttrgroupRelationDao;
 import com.lzqwn.mall.product.entity.AttrAttrgroupRelationEntity;
 import com.lzqwn.mall.product.service.AttrAttrgroupRelationService;
+import com.lzqwn.mall.product.vo.AttrGroupRelationVo;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 
 @Service("attrAttrgroupRelationService")
@@ -26,4 +30,18 @@ public class AttrAttrgroupRelationServiceImpl extends ServiceImpl<AttrAttrgroupR
         return new PageUtils(page);
     }
 
+    /**
+     * 批量添加属性与分组关联关系
+     * @param vos
+     */
+    @Override
+    public void saveBatchVo(List<AttrGroupRelationVo> vos) {
+
+        List<AttrAttrgroupRelationEntity> collect = vos.stream().map((item) -> {
+            AttrAttrgroupRelationEntity relationEntity = new AttrAttrgroupRelationEntity();
+            BeanUtils.copyProperties(item, relationEntity);
+            return relationEntity;
+        }).collect(Collectors.toList());
+        this.saveBatch(collect);
+    }
 }

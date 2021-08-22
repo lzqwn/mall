@@ -33,7 +33,7 @@ public class CategoryController {
     /**
      * 树形列表
      */
-    @RequestMapping("/treeShapeList")
+    @RequestMapping("/list/tree")
     public R treeShapeList(@RequestParam Map<String, Object> params) {
         List<CategoryEntity> data = categoryService.treeShapeListAll();
         return R.ok().put("data", data);
