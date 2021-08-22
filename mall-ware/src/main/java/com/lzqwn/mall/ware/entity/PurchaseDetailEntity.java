@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
+ * 采购项目
  * @author lzqwn
  * @email 2869245558@qq.com
  * @date 2021-08-12 22:56:58

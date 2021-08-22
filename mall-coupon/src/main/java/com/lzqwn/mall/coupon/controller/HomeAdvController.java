@@ -5,11 +5,7 @@ import com.lzqwn.common.utils.R;
 import com.lzqwn.mall.coupon.entity.HomeAdvEntity;
 import com.lzqwn.mall.coupon.service.HomeAdvService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -18,9 +14,9 @@ import java.util.Map;
 /**
  * 首页轮播广告
  *
- * @author lzqwn
- * @email 2869245558@qq.com
- * @date 2021-08-12 22:44:06
+ * @author 夏沫止水
+ * @email HeJieLin@gulimall.com
+ * @date 2020-05-22 19:35:30
  */
 @RestController
 @RequestMapping("coupon/homeadv")
@@ -32,7 +28,8 @@ public class HomeAdvController {
      * 列表
      */
     @RequestMapping("/list")
-    public R list(@RequestParam Map<String, Object> params) {
+    //@RequiresPermissions("coupon:homeadv:list")
+    public R list(@RequestParam Map<String, Object> params){
         PageUtils page = homeAdvService.queryPage(params);
 
         return R.ok().put("page", page);
@@ -43,8 +40,9 @@ public class HomeAdvController {
      * 信息
      */
     @RequestMapping("/info/{id}")
-    public R info(@PathVariable("id") Long id) {
-        HomeAdvEntity homeAdv = homeAdvService.getById(id);
+    //@RequiresPermissions("coupon:homeadv:info")
+    public R info(@PathVariable("id") Long id){
+		HomeAdvEntity homeAdv = homeAdvService.getById(id);
 
         return R.ok().put("homeAdv", homeAdv);
     }
@@ -53,8 +51,9 @@ public class HomeAdvController {
      * 保存
      */
     @RequestMapping("/save")
-    public R save(@RequestBody HomeAdvEntity homeAdv) {
-        homeAdvService.save(homeAdv);
+    //@RequiresPermissions("coupon:homeadv:save")
+    public R save(@RequestBody HomeAdvEntity homeAdv){
+		homeAdvService.save(homeAdv);
 
         return R.ok();
     }
@@ -63,8 +62,9 @@ public class HomeAdvController {
      * 修改
      */
     @RequestMapping("/update")
-    public R update(@RequestBody HomeAdvEntity homeAdv) {
-        homeAdvService.updateById(homeAdv);
+    //@RequiresPermissions("coupon:homeadv:update")
+    public R update(@RequestBody HomeAdvEntity homeAdv){
+		homeAdvService.updateById(homeAdv);
 
         return R.ok();
     }
@@ -73,8 +73,9 @@ public class HomeAdvController {
      * 删除
      */
     @RequestMapping("/delete")
-    public R delete(@RequestBody Long[] ids) {
-        homeAdvService.removeByIds(Arrays.asList(ids));
+    //@RequiresPermissions("coupon:homeadv:delete")
+    public R delete(@RequestBody Long[] ids){
+		homeAdvService.removeByIds(Arrays.asList(ids));
 
         return R.ok();
     }

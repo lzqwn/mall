@@ -8,8 +8,10 @@ import com.lzqwn.common.utils.Query;
 import com.lzqwn.mall.ware.dao.PurchaseDetailDao;
 import com.lzqwn.mall.ware.entity.PurchaseDetailEntity;
 import com.lzqwn.mall.ware.service.PurchaseDetailService;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
 
 
@@ -18,12 +20,38 @@ public class PurchaseDetailServiceImpl extends ServiceImpl<PurchaseDetailDao, Pu
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
+
+        QueryWrapper<PurchaseDetailEntity> queryWrapper = new QueryWrapper<PurchaseDetailEntity>();
+
+        String key = (String) params.get("key");
+        if (!StringUtils.isEmpty(key)) {
+            queryWrapper.and(wrapper -> {
+                wrapper.eq("purchase_id",key).or().eq("sku_id",key);
+            });
+        }
+
+        String status = (String) params.get("status");
+        if (!StringUtils.isEmpty(status) && !"0".equalsIgnoreCase(status)) {
+            queryWrapper.eq("status",status);
+        }
+
+        String wareId = (String) params.get("wareId");
+        if (!StringUtils.isEmpty(wareId) && !"0".equalsIgnoreCase(wareId)) {
+            queryWrapper.eq("ware_id",wareId);
+        }
+
         IPage<PurchaseDetailEntity> page = this.page(
                 new Query<PurchaseDetailEntity>().getPage(params),
-                new QueryWrapper<PurchaseDetailEntity>()
+                queryWrapper
         );
 
         return new PageUtils(page);
     }
 
+    @Override
+    public List<PurchaseDetailEntity> listDetailByPurchaseId(Long id) {
+
+        return this.list(
+                new QueryWrapper<PurchaseDetailEntity>().eq("purchase_id", id));
+    }
 }

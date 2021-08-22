@@ -5,11 +5,7 @@ import com.lzqwn.common.utils.R;
 import com.lzqwn.mall.coupon.entity.HomeSubjectEntity;
 import com.lzqwn.mall.coupon.service.HomeSubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -18,9 +14,9 @@ import java.util.Map;
 /**
  * 首页专题表【jd首页下面很多专题，每个专题链接新的页面，展示专题商品信息】
  *
- * @author lzqwn
- * @email 2869245558@qq.com
- * @date 2021-08-12 22:44:06
+ * @author 夏沫止水
+ * @email HeJieLin@gulimall.com
+ * @date 2020-05-22 19:35:30
  */
 @RestController
 @RequestMapping("coupon/homesubject")
@@ -32,7 +28,8 @@ public class HomeSubjectController {
      * 列表
      */
     @RequestMapping("/list")
-    public R list(@RequestParam Map<String, Object> params) {
+    //@RequiresPermissions("coupon:homesubject:list")
+    public R list(@RequestParam Map<String, Object> params){
         PageUtils page = homeSubjectService.queryPage(params);
 
         return R.ok().put("page", page);
@@ -43,8 +40,9 @@ public class HomeSubjectController {
      * 信息
      */
     @RequestMapping("/info/{id}")
-    public R info(@PathVariable("id") Long id) {
-        HomeSubjectEntity homeSubject = homeSubjectService.getById(id);
+    //@RequiresPermissions("coupon:homesubject:info")
+    public R info(@PathVariable("id") Long id){
+		HomeSubjectEntity homeSubject = homeSubjectService.getById(id);
 
         return R.ok().put("homeSubject", homeSubject);
     }
@@ -52,9 +50,9 @@ public class HomeSubjectController {
     /**
      * 保存
      */
-    @RequestMapping("/save")
-    public R save(@RequestBody HomeSubjectEntity homeSubject) {
-        homeSubjectService.save(homeSubject);
+    @PostMapping("/save")
+    public R save(@RequestBody HomeSubjectEntity homeSubject){
+		homeSubjectService.save(homeSubject);
 
         return R.ok();
     }
@@ -63,8 +61,8 @@ public class HomeSubjectController {
      * 修改
      */
     @RequestMapping("/update")
-    public R update(@RequestBody HomeSubjectEntity homeSubject) {
-        homeSubjectService.updateById(homeSubject);
+    public R update(@RequestBody HomeSubjectEntity homeSubject){
+		homeSubjectService.updateById(homeSubject);
 
         return R.ok();
     }
@@ -73,8 +71,9 @@ public class HomeSubjectController {
      * 删除
      */
     @RequestMapping("/delete")
-    public R delete(@RequestBody Long[] ids) {
-        homeSubjectService.removeByIds(Arrays.asList(ids));
+    //@RequiresPermissions("coupon:homesubject:delete")
+    public R delete(@RequestBody Long[] ids){
+		homeSubjectService.removeByIds(Arrays.asList(ids));
 
         return R.ok();
     }

@@ -33,6 +33,20 @@ spring:
           filters:
             - RewritePath=/api/(?<segment>/?.*),/$\{segment}
 
+        - id: ware_route
+          uri: lb://mall-ware #库存路由
+          predicates:
+            - Path=/api/ware/**
+          filters:
+            - RewritePath=/api/(?<segment>/?.*),/$\{segment}
+
+        - id: ware_conpon
+          uri: lb://mall-conpon #优惠路由
+          predicates:
+            - Path=/api/conpon/**
+          filters:
+            - RewritePath=/api/(?<segment>/?.*),/$\{segment}
+
         - id: third_party_route #第三方服务路由
           uri: lb://mall-third-party # 注册中心的服务
           predicates:

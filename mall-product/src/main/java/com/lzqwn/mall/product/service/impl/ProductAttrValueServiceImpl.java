@@ -9,8 +9,11 @@ import com.lzqwn.mall.product.dao.ProductAttrValueDao;
 import com.lzqwn.mall.product.entity.ProductAttrValueEntity;
 import com.lzqwn.mall.product.service.ProductAttrValueService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 
 @Service("productAttrValueService")
@@ -26,4 +29,31 @@ public class ProductAttrValueServiceImpl extends ServiceImpl<ProductAttrValueDao
         return new PageUtils(page);
     }
 
+    /**
+     * 修改商品规格
+     * @param spuId
+     * @param entities
+     */
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public void updateSpuAttr(Long spuId, List<ProductAttrValueEntity> entities) {
+        //1、删除spuId之前对应的所有属性
+        this.baseMapper.delete(new QueryWrapper<ProductAttrValueEntity>().eq("spu_id",spuId));
+
+        //2、添加商品规格信息
+        List<ProductAttrValueEntity> collect = entities.stream().map(item -> {
+            item.setSpuId(spuId);
+            return item;
+        }).collect(Collectors.toList());
+
+        //批量新增
+        this.saveBatch(collect);
+    }
+
+    @Override
+    public List<ProductAttrValueEntity> baseAttrListforspu(Long spuId) {
+
+        return this.baseMapper.selectList(
+                new QueryWrapper<ProductAttrValueEntity>().eq("spu_id", spuId));
+    }
 }

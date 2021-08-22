@@ -33,5 +33,7 @@ public interface AttrService extends IService<AttrEntity> {
 
 
     void deleteRelation(AttrGroupRelationVo[] vos);
+
+    void updateAttrById(AttrVo attr);
 }
 

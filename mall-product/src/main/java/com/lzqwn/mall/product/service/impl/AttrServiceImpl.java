@@ -28,6 +28,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -51,6 +52,9 @@ public class AttrServiceImpl extends ServiceImpl<AttrDao, AttrEntity> implements
 
     @Autowired
     private CategoryService categoryService;
+
+    @Resource
+    public AttrAttrgroupRelationDao attrgroupRelationDao;
 
     /**
      * 分页查询商品属性信息
@@ -278,5 +282,33 @@ public class AttrServiceImpl extends ServiceImpl<AttrDao, AttrEntity> implements
 
         attrAttrgroupRelationDao.deleteBatchRelation(entities);
         //attrgroupRelationService.remove(new QueryWrapper<AttrAttrgroupRelationEntity>().eq("attr_id",entities.));
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public void updateAttrById(AttrVo attr) {
+
+        AttrEntity attrEntity = new AttrEntity();
+        BeanUtils.copyProperties(attr,attrEntity);
+
+        this.updateById(attrEntity);
+
+        if (attrEntity.getAttrType() == ProductConstant.AttrEnum.ATTR_TYPE_BASE.getCode()) {
+            //1、修改分组关联
+            AttrAttrgroupRelationEntity relationEntity = new AttrAttrgroupRelationEntity();
+            relationEntity.setAttrGroupId(attr.getAttrGroupId());
+            relationEntity.setAttrId(attr.getAttrId());
+
+            Integer count = attrgroupRelationDao.selectCount(new QueryWrapper<AttrAttrgroupRelationEntity>()
+                    .eq("attr_id", attr.getAttrId()));
+
+            if (count > 0) {
+                attrgroupRelationDao.update(relationEntity,
+                        new UpdateWrapper<AttrAttrgroupRelationEntity>().eq("attr_id",attr.getAttrId()));
+            } else {
+                attrgroupRelationDao.insert(relationEntity);
+            }
+        }
+
     }
 }
