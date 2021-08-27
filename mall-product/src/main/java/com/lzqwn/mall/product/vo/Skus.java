@@ -11,6 +11,7 @@ import java.util.List;
 
 /**
  * 发布商品Vo
+ *
  * @author lzwqn
  */
 @Data
