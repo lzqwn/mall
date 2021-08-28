@@ -8,8 +8,11 @@ import org.elasticsearch.client.RestHighLevelClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * @author lzqwn
+ */
 @Configuration
-public class EsConfig {
+public class ElasticSearchConfig {
     public static final RequestOptions COMMON_OPTIONS;
 
     static {
@@ -20,12 +23,9 @@ public class EsConfig {
 
     @Bean
     public RestHighLevelClient esRestClient() {
-
-        RestClientBuilder builder = null;
         // 可以指定多个es
-        builder = RestClient.builder(new HttpHost("192.168.169.2", 9200, "http"));
+        RestClientBuilder builder = RestClient.builder(new HttpHost("192.168.169.2", 9200, "http"));
 
-        RestHighLevelClient client = new RestHighLevelClient(builder);
-        return client;
+        return new RestHighLevelClient(builder);
     }
 }

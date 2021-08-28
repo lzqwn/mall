@@ -14,7 +14,7 @@ import java.util.List;
  * @createTime: 2020-06-06 15:50
  **/
 
-@FeignClient("gulimall-ware")
+@FeignClient("mall-ware")
 public interface WareFeignService {
 
     @PostMapping(value = "/ware/waresku/hasStock")
