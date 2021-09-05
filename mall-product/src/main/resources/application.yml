@@ -37,6 +37,12 @@ spring:
         server-addr: 192.168.169.2:8848
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
+
+  #关闭thymeleaf缓存
+  thymeleaf:
+    cache: false
+    suffix: .html
+    prefix: classpath:/templates/
 # MapperScan
 # sql映射文件位置
 mybatis-plus:
